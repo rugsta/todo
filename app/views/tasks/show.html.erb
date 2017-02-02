@@ -1,0 +1,47 @@
+<div class="container">
+<div class="panel panel-default">
+
+  <!-- Table -->
+  <table class="table table-bordered">
+  		<thead class="thead-inverse">
+   		<tr>
+		<th>Title</th>
+	  	<th>Task</th>
+	  	<th>Created</th>
+	  	<th>Complete</th>
+	  	</tr>
+	  	</thead>
+  	<% if @tasks.empty? %>
+	    <tr>
+		<td>No Tasks</td>
+	  	<td></td>
+	  	<td></td>
+	  	<td></td>
+	  	</tr>
+ 	<% else %>
+ 		<% @tasks.each do |x| %>
+			<tr>
+			<td><%=x.title%></td>
+			<td><%=x.note%></td>
+			<td><%=x.created_at.localtime.strftime("%A %d %I:%M%p")%></td>
+			<% if x.completed == true %>
+				<td>  
+					<div class="checkbox">	
+                	<span class="cr"><i class="cr-icon fa fa-check"></i></span><%=x.updated_at.to_date%>
+        			</div>
+				</td>
+			<% else %>
+				<td></td>
+			<% end %>
+			<td><%= link_to 'edit', edit_task_path(x) %></td>
+			<td><%= link_to('delete', task_path(x), :method => :delete) %></td>
+			</tr>
+		<% end %>
+	<% end %>
+  </table>
+
+</div>
+</div>
+
+
+

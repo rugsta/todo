@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="form-group">
+  <h2>Add Task</h2>
+  <%= simple_form_for @task do |f| %>
+
+    <div class="form-group">
+      <label>Title</label>
+      <%= f.input :title, label: false, :input_html => {:maxlength => 30, :style=> 'width: 450px'}%>
+    </div>
+
+    <div class="form-group">
+      <label>Notation</label>
+      <%= f.input :note, label: false, :input_html => {:maxlength => 400, :style=> 'width: 450px'}%>
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <%= f.label :completed do %> 
+          <%= f.check_box :completed %>
+          <span class="cr"><i class="cr-icon fa fa-check"></i></span>  
+          <b>Completed?</b>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group">
+            <%= f.button :submit, class: "btn btn-primary"%>
+    </div>
+
+
+  <% end %>
+  </div>
+
+</div>
+
