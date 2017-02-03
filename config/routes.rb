@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  root to: 'tasks#show'
+  root to: 'static#hello'
 
-  resources :tasks, except: [:index]
+  resources :tasks
   resources :users, except: [:index]
   resources :sessions, except: [:index]
 

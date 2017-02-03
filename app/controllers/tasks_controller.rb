@@ -1,7 +1,11 @@
 class TasksController < ApplicationController
 
+	def index
+			@tasks = Task.where :created_by => session[:user_id]
+			binding.pry
+	end
+
 	def show
-		@tasks = Task.all
 	end
 
 	def new
@@ -14,14 +18,14 @@ class TasksController < ApplicationController
 	end
 
 	def edit
-    	@task = Task.find(params[:id])
-  	end
+    @task = Task.find(params[:id])
+  end
 
-  	def update
-  		@task = Task.find(params[:id])
-  		@task.update(task_params)
-  		redirect_to root_path
-  	end
+  def update
+  	@task = Task.find(params[:id])
+  	@task.update(task_params)
+  	redirect_to root_path
+  end
 
 	def destroy
 		@task = Task.find(params[:id])
@@ -32,6 +36,6 @@ class TasksController < ApplicationController
 
 	private
 	def task_params
-		params.require(:task).permit(:title, :note, :completed)
+		params.require(:task).permit(:title, :note, :completed, :created_by)
 	end
 end
