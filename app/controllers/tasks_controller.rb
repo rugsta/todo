@@ -1,11 +1,8 @@
 class TasksController < ApplicationController
+	before_action :logged_in_user, only: [:create, :destroy]
 
 	def index
-			@tasks = Task.where :created_by => session[:user_id]
-			binding.pry
-	end
-
-	def show
+			@tasks = Task.where :user_id => session[:user_id]
 	end
 
 	def new
@@ -13,8 +10,9 @@ class TasksController < ApplicationController
 	end
 
 	def create
-		@task = Task.create(task_params)
-		redirect_to root_path
+		@task = current_user.tasks.build(task_params)
+		@task.save
+		redirect_to tasks_path
 	end
 
 	def edit
@@ -24,18 +22,18 @@ class TasksController < ApplicationController
   def update
   	@task = Task.find(params[:id])
   	@task.update(task_params)
-  	redirect_to root_path
+  	redirect_to tasks_path
   end
 
 	def destroy
 		@task = Task.find(params[:id])
 		@task.destroy
 
-		redirect_to root_path
+		redirect_to tasks_path
 	end
 
 	private
 	def task_params
-		params.require(:task).permit(:title, :note, :completed, :created_by)
+		params.require(:task).permit(:title, :note, :completed)
 	end
 end

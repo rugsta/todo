@@ -4,8 +4,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name, limit: 255
       t.string :email, limit: 255
       t.string :password_digest, limit: 255
-      t.boolean :logged_in
-      t.string :extension, limit: 255
 
       t.timestamps
     end
